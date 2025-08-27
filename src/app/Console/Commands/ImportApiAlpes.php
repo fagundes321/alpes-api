@@ -16,11 +16,11 @@ class ImportApiAlpes extends Command
         $json = Http::get('https://hub.alpes.one/api/v1/integrator/export/1902')->json();
 
         foreach ($json as $item) {
-
-
+            // Definir uma chave única: chassi real ou board ou gerar ID único
+            $uniqueKey = $item['chassi'] ?? $item['board'] ?? uniqid('car_');
 
             Car::updateOrCreate(
-                ['board' => $item['board'] ?? null], // chave única real
+                ['chassi' => $uniqueKey], // chave única no banco
                 [
                     'type' => $item['type'] ?? null,
                     'brand' => $item['brand'] ?? null,
@@ -49,6 +49,6 @@ class ImportApiAlpes extends Command
             );
         }
 
-        $this->info('Importação concluída!');
+        $this->info('Importação concluída com sucesso! Todos os carros foram processados.');
     }
 }

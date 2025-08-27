@@ -10,7 +10,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        return Car::paginate(20);
+        return Car::paginate(20); // todos os carros paginados
     }
 
     public function show($id)
