@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Instalar dependências do sistema e extensões do PHP necessárias ao Laravel
+# Dependências do sistema
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -11,11 +11,14 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd dom xml
 
-# Instalar Composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Instalar o Laravel automaticamente na pasta /var/www/html se não existir
 WORKDIR /var/www/html
-RUN [ ! -f "artisan" ] && composer create-project laravel/laravel . || true
+COPY ./src/ .
+
+# Permissões
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
