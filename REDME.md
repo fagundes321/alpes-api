@@ -2,7 +2,7 @@
 
 ## **Descrição**
 
-Aplicação Laravel que importa dados de carros a partir da API da Alpes One, salva no banco de dados MySQL e fornece uma API REST para CRUD dos registros.  
+Aplicação Laravel que importa dados de carros a partir da API da Alpes One, salva no banco de dados MySQL .  
 
 ---
 
