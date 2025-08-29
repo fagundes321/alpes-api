@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # NGINX
   nginx:
     image: nginx:latest
     container_name: laravel_nginx
@@ -13,7 +12,6 @@ services:
     depends_on:
       - php
 
-  # PHP-FPM (Laravel + Composer)
   php:
     build:
       context: .
@@ -25,7 +23,6 @@ services:
     depends_on:
       - mysql
 
-  # MYSQL
   mysql:
     image: mysql:8.0
     container_name: laravel_mysql
@@ -40,7 +37,6 @@ services:
     ports:
       - "3307:3306"
 
-  # PHPMYADMIN
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: laravel_phpmyadmin
